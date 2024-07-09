@@ -1,0 +1,55 @@
+.custom-select {
+  color: #000;
+  background-color: #fff;
+  font-size: 1.2em;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.card {
+  position: relative;
+  background-color: #818cf8;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff;
+  border-radius: 0.5rem;
+  transform: translate(-4px, -4px);
+  z-index: -1;
+}
+
+.capitalize-first-letter::first-letter {
+  text-transform: uppercase;
+}
+
+.loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid #818cf8;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
