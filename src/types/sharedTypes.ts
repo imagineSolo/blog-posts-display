@@ -12,5 +12,5 @@ export type TAuthor = {
 
 export type TAuthorFilter = {
   authors: TAuthor[]
-  onFilterChange: (authorId: number) => void
+  onFilterChange: (authorId: number | null) => void
 }

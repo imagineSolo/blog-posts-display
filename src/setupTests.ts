@@ -1,9 +1,6 @@
-import { expect } from 'vitest'
+import { server } from './mocks/server'
 import '@testing-library/jest-dom'
 
-import { describe, it, vi } from 'vitest'
-
-globalThis.describe = describe
-globalThis.it = it
-globalThis.expect = expect
-globalThis.vi = vi
+beforeAll(() => server.listen())
+afterEach(() => server.resetHandlers())
+afterAll(() => server.close())

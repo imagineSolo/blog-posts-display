@@ -1,37 +1,30 @@
-import { useState, useEffect, useRef } from 'react'
-import { getPosts, getUsers } from '../api/api'
-import { TAuthor, TPost } from '../types/sharedTypes'
+import { useState, useEffect } from 'react'
+import { getPosts } from '../api/api'
+import { TPost } from '../types/sharedTypes'
+import { toast } from 'react-toastify'
 
-export const usePosts = () => {
+export const usePosts = (authorId: number | null) => {
   const [posts, setPosts] = useState<TPost[]>([])
-  const [authors, setAuthors] = useState<TAuthor[]>([])
   const [loading, setLoading] = useState<boolean>(true)
-  const originalPosts = useRef<TPost[]>([])
 
-  const fetchData = async () => {
+  const fetchPosts = async () => {
     try {
-      const [postsData, usersData] = await Promise.all([getPosts(), getUsers()])
-      originalPosts.current = postsData
-      setPosts(postsData)
-      setAuthors(usersData)
+      const postsData = await getPosts()
+      if (authorId) {
+        setPosts(postsData.filter((post: TPost) => post.userId === authorId))
+      } else {
+        setPosts(postsData)
+      }
     } catch (error) {
-      console.error('Error fetching data:', error)
+      toast.error('An error occurred while trying to fetch posts.')
     } finally {
       setLoading(false)
     }
   }
 
   useEffect(() => {
-    fetchData()
-  }, [])
+    fetchPosts()
+  }, [authorId])
 
-  const filterPostsByAuthor = (authorId: number) => {
-    if (authorId) {
-      setPosts(originalPosts.current.filter((post) => post.userId === authorId))
-    } else {
-      setPosts(originalPosts.current)
-    }
-  }
-
-  return { posts, authors, filterPostsByAuthor, loading }
+  return { posts, loading }
 }

@@ -1,8 +1,34 @@
-# React + Vite
+# Blog posts App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a React application that displays a list of blog posts. Users can filter blog posts by author using a dropdown menu. The application demonstrates usage of hooks, component composition, and testing with @testing-library/react and vitest.
 
-Currently, two official plugins are available:
+- Features
+  Display a list of blog posts.
+  Filter blog posts by author.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Tech Stack
+  Frontend: React, TypeScript, Tailwind CSS
+  Testing: @testing-library/react, vitest
+  Build Tool: Vite
+
+- Getting Started
+  Prerequisites
+  Node.js (>=14.x)
+  npm (>=6.x) or yarn (>=1.x)
+
+- Installation
+  Clone the repository:
+  git clone https://github.com/yourusername/blog-posts-app.git
+  cd blog-posts-app
+
+- Install dependencies:
+  npm install
+  or
+  yarn install
+
+- Running the Project
+  npm run dev
+  or
+  yarn dev
+
+Open your browser and navigate to http://localhost:3000.
