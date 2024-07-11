@@ -3,14 +3,10 @@ import App from './App'
 import { server } from './mocks/server'
 
 describe('Blog posts', () => {
-  beforeAll(() => server.listen())
-  afterEach(() => server.resetHandlers())
-  afterAll(() => server.close())
-
   it('renders the header correctly', async () => {
     render(<App />)
     await waitFor(() => expect(screen.queryByRole('progressbar')).not.toBeInTheDocument())
-    const headerElement = screen.getByText(/blog posts/i)
+    const headerElement = screen.getByRole('heading', { name: /blog posts/i })
     expect(headerElement).toBeInTheDocument()
     expect(headerElement).toHaveClass('text-5xl', 'text-indigo-500')
   })
@@ -20,7 +16,7 @@ describe('Blog posts', () => {
     await waitFor(() => expect(screen.queryByRole('progressbar')).not.toBeInTheDocument())
     const selectElement = screen.getByRole('combobox')
     expect(selectElement).toBeInTheDocument()
-    expect(selectElement).toHaveClass('custom-select p-2 border border-gray-300 rounded')
+    expect(selectElement).toHaveClass('text-black bg-white text-lg px-2 py-2 border border-gray-300 rounded')
   })
 
   it('renders the List component with posts rendered', async () => {
