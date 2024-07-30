@@ -1,22 +1,25 @@
 import { useState, useEffect } from 'react'
 import { getPosts } from '../api/api'
 import { TPost } from '../types/sharedTypes'
-import { toast } from 'react-toastify'
 
-export const usePosts = (authorId: number | null) => {
+export const usePosts = (authorId: number | null, showError: () => void) => {
   const [posts, setPosts] = useState<TPost[]>([])
   const [loading, setLoading] = useState<boolean>(true)
 
   const fetchPosts = async () => {
+    setLoading(true)
     try {
       const postsData = await getPosts()
       if (authorId) {
-        setPosts(postsData.filter((post: TPost) => post.userId === authorId))
+        console.log('authorId:', authorId)
+        const filteredPosts = postsData.filter((post: TPost) => post.userId === authorId)
+        setPosts(filteredPosts)
       } else {
         setPosts(postsData)
       }
     } catch (error) {
-      toast.error('An error occurred while trying to fetch posts.')
+      console.error('Error fetching posts:', error)
+      showError()
     } finally {
       setLoading(false)
     }
@@ -24,7 +27,7 @@ export const usePosts = (authorId: number | null) => {
 
   useEffect(() => {
     fetchPosts()
-  }, [authorId])
+  }, [authorId, showError])
 
   return { posts, loading }
 }
